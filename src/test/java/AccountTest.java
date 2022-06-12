@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 @RunWith(Parameterized.class)
 public class AccountTest {
 
-    private final String name;
+    private String name;
 
     public AccountTest(String name){
         this.name = name;
@@ -15,7 +15,6 @@ public class AccountTest {
     @Parameterized.Parameters
     public static Object[][] getName() {
         return new Object[][] {
-                {"Nazym Seitbekova"},
                 {"Na"},
                 {"Nazym SeitbekovaSeitbekovaSeitbekovaSeitSeitbekovaSeitbekovaSeitbekovabekova"},
                 {"  Nazym   Seitbekova"},
@@ -25,8 +24,15 @@ public class AccountTest {
         };
     }
     @Test
-    public void checkAccount(){
+    public void checkAccountWithIncorrectValues(){
         Account account = new Account(name);
-        Assert.assertEquals("Имя не соответстуют требованиям", true, account.checkNameToEmboss());
+        Assert.assertEquals("Имя не соответстуют требованиям", false, account.checkNameToEmboss());
     }
+    @Test
+    public void checkAccount(){
+        name = "Nazym Seitbekova";
+        Account account = new Account(name);
+        Assert.assertEquals("Карта скоро будет готова", true, account.checkNameToEmboss());
+    }
+
 }
